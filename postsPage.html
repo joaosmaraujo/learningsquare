@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>smartSquare</title>
+ 
+  <link rel="shortcut icon" type="image/x-icon" href="smartSquare.ico"/>
+  <link rel="stylesheet" href="themes/smoothness/jquery-ui.css">
+  <link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://www.parse.com/downloads/javascript/parse-1.6.7.js"></script>
+  <script src="jquery-ui-1.10.2/jquery-1.9.1.js"></script>
+  <script src="jquery-ui-1.11.4/jquery-ui.js"></script>
+  <script src = "http://www.appelsiini.net/download/jquery.jeditable.js"></script>
+  <script src="modeloDados.js"></script>
+  <script src="loadAnuncios.js"></script>
+  
+  
+<style>
+	
+  @font-face { font-family: mark; src: url(fonts/MARKREGULAR.otf); }
+  .post-buttons li { display: inline; }
+  #dialog-anuncio { font-size: 80%; }
+  fieldset { padding:0; border:0; margin-top:25px; }
+  .ui-dialog .ui-state-error { padding: .3em; }
+  .validateTips { border: 1px solid transparent; padding: 0.3em; }
+  input.text { margin-bottom:12px; width:95%; padding: .4em; }
+   
+    
+  
+</style>
+</head>
+<body>
+    <header>
+      <div class="container">
+        <div class="row" style ="padding: 50px 0;">
+           
+        
+          <div class="col-md-9" style="text-align: center; font-family: mark; font-size: 60px;"><img src="logo-ss.jpg" style="width: 8%"><strong> smart square</strong></div>
+          <div class="col-md-3" style="padding-left: 200px">
+              <p id ="utilizadorSessao" style="font-family: mark"></p>
+              <button type="button" class="btn btn-danger btn-sm" id="logout"><span class="glyphicon glyphicon-off"> Logout</span></button>
+           </div>
+        </div>
+      </div>
+    </header>
+  
+  	<div class="container">
+
+        <!-- PostIts mais recentes -->
+        <div class="row">
+          <div class="jumbotron" style="margin:0; padding: 10px 25px;">
+            <h3 style="font-family: mark">mais recentes</h3>
+            <canvas id="mais-recentes" width="1120" height="200">
+                Your browser does not support HTML5 Canvas.
+            </canvas>
+          </div>
+        </div>
+        
+      
+      
+      <div class="row" style="padding: 70px 0 5px 0;">
+        
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary" id="adicionar-anuncio" data-toggle="tooltip" title="Clique pra criar novo anúncio"><span class="glyphicon glyphicon-plus"></span></button>
+            </div>
+            
+            <div class="col-md-4">
+                <form class="form-inline" role="form">
+                    <div class="form-group">
+                        <label for="select" style="font-family: mark;">Curso:</label>
+                        <select class="form-control" id="filtro-curso" style="font-family: mark;">
+                            <option value="todos">Todos</option>
+                            <option value="Geral">Geral</option>
+                            <option value="Contabilidade e Administração">Contabilidade e Administração</option>
+                            <option value="CTDI">CTDI</option>
+                            <option value="Design Gráfico">Design Gráfico</option>
+                            <option value="Engenharia Biomédica">Engenharia Biomédica</option>
+                            <option value="Gestão e Administração Hoteleira">Gestão e Administração Hoteleira</option>
+                            <option value="Recursos Humanos">Recursos Humanos</option>
+                            <option value="TSIW">TSIW</option>  
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <form class="form-inline" role="form">
+                    <div class="form-group">
+                        <label for="select" style="font-family: mark;">Tema:</label>
+                        <select class="form-control" id="filtro-tema" style="font-family: mark;">
+                            <option value="todos">Todos</option>
+                            <option value="Geral">Geral</option>
+                            <option value="Apontamentos">Apontamentos</option>
+                            <option value="Aulas">Aulas</option>
+                            <option value="Eventos">Eventos</option>
+                            <option value="Testes">Testes</option>
+                            <option value="Trabalhos">Trabalhos</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-2">
+                <button type="button" id="meus-anuncios" class="btn btn-primary" data-toggle="tooltip" title="Clique pra visualizar os seus anúncios"><span class="glyphicon glyphicon-th-large"></span> Os Meus Anúncios</button>
+            </div>
+            
+      </div>
+      
+      <!-- Todos os PostIts ao molho -->
+        <div class="row">
+          <div class="jumbotron" style="margin:0; padding: 10px 25px;">
+            <h3 style="font-family: mark">o meu painel</h3>
+            <canvas id="todos-os-anuncios" width="1200" height="920">
+                Your browser does not support HTML5 Canvas.
+            </canvas>
+          </div>
+        </div>
+    
+	</div>
+    <div id="dialog-anuncio" title="Crie o seu anúncio">
+     
+      
+        <fieldset>
+            <form role="form" id = "formulario-anuncio" style="font-family: mark; font-size: 14px;">
+            <div class="form-group">
+                <label for="text" style="font-family: mark;">Curso: </label>
+                <select id="opcoes-curso" class="form-control" style="font-family: mark;">
+                    <option value="Geral">Geral</option>
+                    <option value="Contabilidade e Administração">Contabilidade e Administração</option>
+                    <option value="CTDI">CTDI</option>
+                    <option value="Design Gráfico">Design Gráfico</option>
+                    <option value="Engenharia Biomédica">Engenharia Biomédica</option>
+                    <option value="Gestão e Administração Hoteleira">Gestão e Administração Hoteleira</option>
+                    <option value="Recursos Humanos">Recursos Humanos</option>
+                    <option value="TSIW">TSIW</option>  
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="text">Tema: </label>
+                <select id="opcoes-tema" class="form-control" style="font-family: mark;">
+                    <option value="Geral">Geral</option>
+                    <option value="Apontamentos">Apontamentos</option>
+                    <option value="Aulas">Aulas</option>
+                    <option value="Eventos">Eventos</option>
+                    <option value="Testes">Testes</option>
+                    <option value="Trabalhos">Trabalhos</option>
+                </select>
+            </div>
+            <p><label for="textarea">Mensagem:</label></p>
+            <textarea rows="7" cols="48" name="name" id="mensagem-anuncio" class="text ui-widget-content ui-corner-all"></textarea>
+            <!-- Allow form submission with keyboard without duplicating the dialog button -->
+            <input type="submit"  id = "submit-post" tabindex="-1" style="position:absolute; top:-1000px">
+          </form>    
+        </fieldset>
+      
+    </div>
+    
+    <div id="post-informacao" title="Anúncio">
+      
+        <fieldset>
+         <form role="form" id = "formulario-post" style="font-family: mark; font-size: 14px;">
+            <div class="form-group">
+                <p><label>Nome: <span id="nomePost"></span></label></p>
+                <p><label>Nome: <span id="emailPost"></span></label></p>
+                <label for="text" style="font-family: mark;">Curso: </label>
+                <select id="cursoPost" class="form-control" style="font-family: mark;" disabled>
+                    <option value="Geral">Geral</option>
+                    <option value="Contabilidade e Administração">Contabilidade e Administração</option>
+                    <option value="CTDI">CTDI</option>
+                    <option value="Design Gráfico">Design Gráfico</option>
+                    <option value="Engenharia Biomédica">Engenharia Biomédica</option>
+                    <option value="Gestão e Administração Hoteleira">Gestão e Administração Hoteleira</option>
+                    <option value="Recursos Humanos">Recursos Humanos</option>
+                    <option value="TSIW">TSIW</option>  
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="text">Tema: </label>
+                <select id="temaPost" class="form-control" style="font-family: mark;" disabled>
+                    <option value="Geral">Geral</option>
+                    <option value="Apontamentos">Apontamentos</option>
+                    <option value="Aulas">Aulas</option>
+                    <option value="Eventos">Eventos</option>
+                    <option value="Testes">Testes</option>
+                    <option value="Trabalhos">Trabalhos</option>
+                </select>
+            </div>
+            <p><label for="textarea">Mensagem:</label></p>
+            <textarea rows="5" cols="48" name="name" id="mensagemPost" class="text ui-widget-content ui-corner-all" disabled></textarea>
+            <div class="form-group">
+                
+                <input type="button" class="form-control" style="width: 150px; display: inline;" value = "editar" id = "editarAnuncio" disabled></input>
+                <input type="button" class="form-control" style="width: 150px; display: inline;" value = "eliminar" id = "eliminarAnuncio" disabled></input>
+            </div>
+          </form>    
+        </fieldset>
+      
+    </div>
+  
+  <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip(); 
+        });
+  </script>
+  <script src ="postsPage.js"></script>
+  <script src="anunciosTodos.js"></script>
+  <script src="anunciosRecentes.js"></script>
+  
+  
+</body>
+
+
+
+</html>

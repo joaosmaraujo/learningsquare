@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>smartSquare</title>
+  <link rel="shortcut icon" type="image/x-icon" href="smartSquare.ico"/>
+  <link rel="stylesheet" href="themes/smoothness/jquery-ui.css">
+  <script src="jquery-ui-1.10.2/jquery-1.9.1.js"></script>
+  <script src="jquery-ui-1.11.4/jquery-ui.js"></script>
+  <script src="http://maps.googleapis.com/maps/api/js"></script>
+  <script src="gmap.js"></script>
+  <script src="https://www.parse.com/downloads/javascript/parse-1.6.7.js"></script>
+  <script src="modeloDados.js"></script>
+  <script src = "registoLogin.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+  
+
+  <style>
+	 
+     @font-face { font-family: mark; src: url(fonts/MARKREGULAR.otf); }
+     .container { text-align: center; }
+	 .logo { text-align: center; padding: 50px 0; margin: 0 auto; }
+	 .acesso { padding: 200px 0; }
+     #dialog-registo { font-size: 80%; }
+     label, input { display:block; }
+     input.text { margin-bottom:12px; width:95%; padding: .4em; }
+     fieldset { padding:0; border:0; margin-top:25px; }
+     h1 { font-size: 1.2em; margin: .6em 0; }
+     .ui-dialog .ui-state-error { padding: .3em; }
+     .validate-tips { border: 1px solid transparent; padding: 0.3em; }
+  </style>
+ 
+</head>
+	
+
+<body>
+	
+  
+  <!-- janela de diálogo para criar registo preenchendo formulário -->
+  <div id="dialog-registo" title="Registar novo utilizador" style="font-family: mark">
+  
+    
+    
+      <fieldset>
+        <form role="form" id = "formulario-registo" style="font-family: mark; font-size: 14px;">
+            <div class="form-group">    
+                <label for="name">Nome: </label>
+                <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all">
+                <label for="email">E-mail </label>
+                <input type="email" name="email" id="email" class="text ui-widget-content ui-corner-all">
+                <label for="password">Password </label>
+                <input type="password" name="password" id="password" class="text ui-widget-content ui-corner-all">
+                <label for="select" style="font-family: mark;">Curso: </label>
+                <select class="form-control" id="filtro-curso" style="font-family: mark;">
+                    <option value="todos">Todos</option>
+                    <option value="Geral">Geral</option>
+                    <option value="Contabilidade e Administração">Contabilidade e Administração</option>
+                    <option value="CTDI">CTDI</option>
+                    <option value="Design Gráfico">Design Gráfico</option>
+                    <option value="Engenharia Biomédica">Engenharia Biomédica</option>
+                    <option value="Gestão e Administração Hoteleira">Gestão e Administração Hoteleira</option>
+                    <option value="Recursos Humanos">Recursos Humanos</option>
+                    <option value="TSIW">TSIW</option>  
+                </select>
+            </div>
+        <p id="mensagemErroRegisto" style="color:red"></p>
+        <!-- Allow form submission with keyboard without duplicating the dialog button -->
+        <input type="submit" id = "submit-registo" tabindex="-1" style="position:absolute; top:-1000px">
+      </form>
+   </fieldset>
+    
+  </div>
+  
+  <!-- janela de diálogo para fazer login -->
+  <div id="dialog-login" title="Entre no smart square">
+    <form role="form" id = "formulario-login" style="font-family: mark; font-size: 14px;">
+      <fieldset>
+        <label for="name">Nome de utilizador: </label>
+        <input type="text" name="numero" id="nome-login" class="text ui-widget-content ui-corner-all">
+        <label for="text">Password: </label>
+        <input type="password" name="name" id="password-login" class="text ui-widget-content ui-corner-all">
+        <p id = "mensagemErroLogin" style="color: red;"></p>
+        <!-- Allow form submission with keyboard without duplicating the dialog button -->
+        <input type="submit"  id = "submit-login" tabindex="-1" style="position:absolute; top:-1000px">
+      </fieldset>
+    </form>
+  </div>
+  
+  <div class="container-fluid" style="height: 100vh; background-image: url('layout.jpg'); background-size: 100% 100%; background-repeat: no-repeat; background-position: center;">
+    <div class="row acesso">
+        <div class="col-md-12" style="text-align: center; padding: 20vh; font-family: mark;">
+            <p style ="font-size: 60px;"><img src="logo-ss.jpg" style="width: 5%"></img><strong> smart square</strong></p><br>
+            <p><button type="button" id="registar" class="btn btn-primary" style="width: 200px;"><span class="glyphicon glyphicon-user"></span> Registar</button></p>
+            <p><button type="button" id = "login" class="btn btn-primary" style="width: 200px;"><span class="glyphicon glyphicon-hand-right"></span> Login</button></p>
+        </div>
+    </div>
+  </div>
+  
+  <footer id = "googleApi">
+    <div class="container-fluid">
+        <div class = "row bg-primary" style="padding: 50px; font-family: mark;" >
+            <p style="font-size: 50px; text-align: center;"><strong>Sobre o smart square</strong></p>
+            <div style="font-size: 16px; text-align: center;"> 
+            <p style = "font-size: 28px;">Este é o twitter personalizado da ESEIG</p>
+            <p>Sob a forma de um quadro digital de pequenos anúncios coloridos, podes:</p>
+            <p>pedir ajuda, apontamentos ou deixar informações sobre aulas</p>
+            <p>anunciar os eventos que estás a organizar</p>
+            <p>e muito mais...</p>
+        </div>
+    </div>
+    <div class="row" id = "rowMap" style = "font-family: mark; padding:20px">
+          <div class = "col-md-5">
+              <div class = "col-md-offset-5" style = "padding-bottom:40px">
+                  <label style="font-size: 15px;"><strong>Contactos</strong></label>
+              </div>
+              <div class = "col-md-offset-1 col-md-4">
+                  <p>João Araújo</p>
+                  <p>Joaosmaraujo@gmail.com</p>
+                  <p>916 077 799</p>
+              </div>
+              <div class = "col-md-offset-2 col-md-4">
+                <p>Filipe Costa</p>
+                <p>filipecosta_10@hotmail.com</p>
+                <p>917 024 160</p>
+              </div>
+          </div>
+          <div class="col-md-7">
+            <div id="googleMap" style="height:300px;"></div>
+          </div>
+      </div>
+    </div>
+  </footer>
+  
+  
+</body>
+
+</html>

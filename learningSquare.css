@@ -2,6 +2,10 @@
     font-family: mark;
     src: url(fonts/MARKREGULAR.otf);
 }
+
+body {
+    font-family: mark;
+}
      
 .container { 
     text-align: center; 
@@ -55,9 +59,7 @@ h1 {
     font-size: 14px;
 }
 
-body {
-    font-family: mark;
-}
+
 
 #mensagemErroRegisto {
     color: red;

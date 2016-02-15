@@ -2,11 +2,7 @@
     font-family: mark;
     src: url(fonts/MARKREGULAR.OTF);
 }
-
-body {
-    font-family: mark;
-}
-     
+    
 .container { 
     text-align: center; 
 }

@@ -10,11 +10,11 @@
   <script src="jquery-ui-1.11.4/jquery-ui.js"></script>
   <script src="http://maps.googleapis.com/maps/api/js"></script>
   <script src="gmap.js"></script>
+  <link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="learningSquare.css" rel="stylesheet">
   <script src="https://www.parse.com/downloads/javascript/parse-1.6.7.js"></script>
   <script src="modeloDados.js"></script>
-  <script src = "registoLogin.js"></script>  
-  <link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="learningSquare.css">
+  <script src = "registoLogin.js"></script>
 </head>
 	
 
@@ -50,7 +50,7 @@
             </div>
         <p id="mensagemErroRegisto"></p>
         <!-- Allow form submission with keyboard without duplicating the dialog button -->
-        <input type="submit" id = "submit-registo" tabindex="-1" style="position:absolute; top:-1000px">
+        <input type="submit" id = "submit-registo" tabindex="-1">
       </form>
    </fieldset>
     
@@ -64,22 +64,23 @@
         <input type="text" name="numero" id="nome-login" class="text ui-widget-content ui-corner-all">
         <label for="text">Password: </label>
         <input type="password" name="name" id="password-login" class="text ui-widget-content ui-corner-all">
-        <p id = "mensagemErroLogin" style="color: red;"></p>
+        <p id = "mensagemErroLogin"></p>
         <!-- Allow form submission with keyboard without duplicating the dialog button -->
-        <input type="submit"  id = "submit-login" tabindex="-1" style="position:absolute; top:-1000px">
+        <input type="submit"  id = "submit-login" tabindex="-1">
       </fieldset>
     </form>
   </div>
   
-  <div class="container-fluid" style="height: 100vh; background-image: url('layout.jpg'); background-size: 100% 100%; background-repeat: no-repeat; background-position: center;">
-    <div class="row acesso">
-        <div class="col-md-12" style="text-align: center; padding: 20vh; font-family: mark;">
-            <p style ="font-size: 60px;"><img src="logo-ss.jpg" style="width: 5%"></img><strong> smart square</strong></p><br>
-            <p><button type="button" id="registar" class="btn btn-primary" style="width: 200px;"><span class="glyphicon glyphicon-user"></span> Registar</button></p>
-            <p><button type="button" id = "login" class="btn btn-primary" style="width: 200px;"><span class="glyphicon glyphicon-hand-right"></span> Login</button></p>
+  <div class="container-fluid" id="logo-homepage">
+    <div class="row entrada">
+        <div class="col-md-12" id="learning-square-name">
+            <p style ="font-size: 60px;"><img src="logo-ss.jpg"></img><strong> learning square</strong></p><br>
+            <p><button type="button" id="registar" class="btn btn-primary"><span class="glyphicon glyphicon-user"></span> Registar</button></p>
+            <p><button type="button" id = "login" class="btn btn-primary"><span class="glyphicon glyphicon-hand-right"></span> Login</button></p>
         </div>
     </div>
   </div>
+  </body>
   
   <footer id = "googleApi">
     <div class="container-fluid">
@@ -117,6 +118,6 @@
   </footer>
   
   
-</body>
+
 
 </html>

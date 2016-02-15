@@ -70,6 +70,13 @@ h1 {
     top: -1000px;
 }
 
+#logo-homepage {
+    height: 100vh;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 #learning-square-name {
     text-align: center;
     font-family: mark;
@@ -78,7 +85,7 @@ h1 {
 
 
 #learning-square-name p img {
-    width: 5%;
+    width: 7%;
 }
 
 #registar, #login {

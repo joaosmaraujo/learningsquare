@@ -32,7 +32,12 @@ function loadAnuncios() {
      }
      }, error: function (error) {
      alert("impossivel carregar anuncios");
-      }                                                                                   
+      }
+    }).then(function() {
+        
+        initTodos();
+        initRecentes();
+                                                                                             
   });
 }
 

@@ -663,5 +663,5 @@ function getMouse(e) {
 
 
 // inicia todos os métodos de desenho e manipulação dos anuncios no canvas
-initTodos();
+
 

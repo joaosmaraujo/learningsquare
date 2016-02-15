@@ -1,4 +1,4 @@
-$(document).ready(function(){
+
    
 
 var canvas2, altura2, largura2, ctx2;
@@ -155,7 +155,3 @@ function myUpRecentes(){
   isDrag2 = false;
 }
 
-initRecentes();
-
-
-});

@@ -73,7 +73,9 @@ h1 {
 #learning-square-name {
     text-align: center;
     font-family: mark;
+    padding: 35vh;
 }
+
 
 #learning-square-name p img {
     width: 5%;

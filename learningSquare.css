@@ -2,6 +2,12 @@
     font-family: mark;
     src: url(fonts/MARKREGULAR.OTF);
 }
+
+body {
+    font-family: mark;
+}
+
+
     
 .container { 
     text-align: center; 
@@ -55,8 +61,35 @@ h1 {
     font-size: 14px;
 }
 
-
-
-#mensagemErroRegisto {
+#mensagemErroRegisto, #mensagemErroLogin {
     color: red;
 }
+
+#submit-registo, #submit-login {
+    position: absolute;
+    top: -1000px;
+}
+
+#logo-homepage {
+    height: 100vh;
+    background-image: url('layout.jpg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#learning-square-name {
+    text-align: center;
+    padding: 20vh;
+    font-family: mark;
+}
+
+#learning-square-name p img {
+    width: 5%;
+}
+
+#registar, #login {
+    width: 200px;
+}
+
+  

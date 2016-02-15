@@ -70,17 +70,8 @@ h1 {
     top: -1000px;
 }
 
-#logo-homepage {
-    height: 100vh;
-    background-image: url('/layout.jpg');
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
 #learning-square-name {
     text-align: center;
-    padding: 20vh;
     font-family: mark;
 }
 

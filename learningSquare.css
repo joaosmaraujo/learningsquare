@@ -72,7 +72,7 @@ h1 {
 
 #logo-homepage {
     height: 100vh;
-    background-image: url('layout.jpg');
+    background-image: url('/layout.jpg');
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
